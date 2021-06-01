@@ -1,0 +1,53 @@
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.9.8 (/opt/ros/foxy/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.5", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Found rclcpp: 2.3.0 (/opt/ros/foxy/share/rclcpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_adapter: 1.2.0 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+-- Found FastRTPS: /opt/ros/foxy/include  
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 1.0.2 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pflab/ros2_foxy_analysis/build/pubsub
+[35m[1mScanning dependencies of target listener[0m
+[35m[1mScanning dependencies of target talker[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/publisher_member_function.cpp:20:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/Int32MultiArray.hpp: そのようなファイルやディレクトリはありません
+   20 | #include [01;31m[K"std_msgs/msg/Int32MultiArray.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:19:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/Int32MultiArray.hpp: そのようなファイルやディレクトリはありません
+   19 | #include [01;31m[K"std_msgs/msg/Int32MultiArray.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/listener.dir/build.make:82: CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o] エラー 1
+make[2]: *** [CMakeFiles/talker.dir/build.make:82: CMakeFiles/talker.dir/src/publisher_member_function.cpp.o] エラー 1
+make[1]: *** [CMakeFiles/Makefile2:126: CMakeFiles/talker.dir/all] エラー 2
+make[1]: *** 未完了のジョブを待っています....
+make[1]: *** [CMakeFiles/Makefile2:99: CMakeFiles/listener.dir/all] エラー 2
+make: *** [Makefile:160: all] エラー 2

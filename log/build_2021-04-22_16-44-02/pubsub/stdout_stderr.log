@@ -1,0 +1,59 @@
+[ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[ 75%] Built target talker
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:[m[K In member function ‘[01m[Kvoid MinimalSubscriber::topic_callback(std_msgs::msg::Int32MultiArray_<std::allocator<void> >::SharedPtr) const[m[K’:
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:41:20:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SharedPtr[m[K’ {aka ‘[01m[Kconst class std::shared_ptr<std_msgs::msg::Int32MultiArray_<std::allocator<void> > >[m[K’} has no member named ‘[01m[Kdata[m[K’
+   41 |       sum += array.[01;31m[Kdata[m[K[i];
+      |                    [01;31m[K^~~~[m[K
+In file included from [01m[K/opt/ros/foxy/include/rclcpp/service.hpp:34[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:25[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+                 from [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:17[m[K:
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:43:5:[m[K [01;31m[Kerror: [m[Kstatic assertion failed: First argument to logging macros must be an rclcpp::Logger
+   43 |     [01;31m[KRCLCPP_INFO[m[K("sum is: %d", sum);
+      |     [01;31m[K^~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:40[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+                 from [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:17[m[K:
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:43:5:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kget_name[m[K’ in ‘[01m[K"sum is: %d"[m[K’, which is of non-class type ‘[01m[Kconst char [11][m[K’
+   43 |     [01;31m[KRCLCPP_INFO[m[K("sum is: %d", sum);
+      |     [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:43:5:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kget_name[m[K’ in ‘[01m[K"sum is: %d"[m[K’, which is of non-class type ‘[01m[Kconst char [11][m[K’
+   43 |     [01;31m[KRCLCPP_INFO[m[K("sum is: %d", sum);
+      |     [01;31m[K^~~~~~~~~~~[m[K
+[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:43:31:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kconst char*[m[K’ [[01;31m[K-fpermissive[m[K]
+   43 |     RCLCPP_INFO("sum is: %d", [01;31m[Ksum[m[K);
+      |                               [01;31m[K^~~[m[K
+      |                               [01;31m[K|[m[K
+      |                               [01;31m[Kint[m[K
+In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:36[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+                 from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+                 from [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:17[m[K:
+[01m[K/opt/ros/foxy/include/rclcpp/utilities.hpp:296:27:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kconst char* rclcpp::get_c_string(const char*)[m[K’
+  296 | get_c_string([01;36m[Kconst char * string_in[m[K);
+      |              [01;36m[K~~~~~~~~~~~~~^~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/listener.dir/build.make:82: CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o] エラー 1
+make[1]: *** [CMakeFiles/Makefile2:99: CMakeFiles/listener.dir/all] エラー 2
+make: *** [Makefile:160: all] エラー 2

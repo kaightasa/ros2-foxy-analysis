@@ -1,0 +1,36 @@
+[0.017s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12
+[0.035s] [35m[1mScanning dependencies of target talker[0m
+[0.035s] [35m[1mScanning dependencies of target listener[0m
+[0.045s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[0.045s] [ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[1.266s] [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:[m[K In member function ‘[01m[Kvoid MinimalSubscriber::topic_callback(std_msgs::msg::Int32MultiArray_<std::allocator<void> >::SharedPtr) const[m[K’:
+[1.266s] [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:35:71:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Karray[m[K’ [[01;35m[K-Wunused-parameter[m[K]
+[1.266s]    35 |   void topic_callback([01;35m[Kconst std_msgs::msg::Int32MultiArray::SharedPtr array[m[K) const
+[1.266s]       |                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[2.969s] [ 75%] [32m[1mLinking CXX executable talker[0m
+[3.118s] [ 75%] Built target talker
+[4.443s] [100%] [32m[1mLinking CXX executable listener[0m
+[4.618s] [100%] Built target listener
+[4.624s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12
+[4.645s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_foxy_analysis/build/pubsub
+[4.647s] -- Install configuration: ""
+[4.647s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/talker
+[4.648s] -- Set runtime path of "/home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/talker" to ""
+[4.648s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+[4.650s] -- Set runtime path of "/home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener" to ""
+[4.650s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/package_run_dependencies/pubsub
+[4.650s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/parent_prefix_path/pubsub
+[4.650s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.sh
+[4.650s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.dsv
+[4.650s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/path.sh
+[4.650s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/path.dsv
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.bash
+[4.651s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.sh
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.zsh
+[4.651s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.dsv
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/package.dsv
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/packages/pubsub
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/cmake/pubsubConfig.cmake
+[4.651s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/cmake/pubsubConfig-version.cmake
+[4.652s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/package.xml
+[4.653s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_foxy_analysis/build/pubsub

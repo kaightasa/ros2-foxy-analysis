@@ -1,0 +1,57 @@
+[0.016s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake /home/pflab/ros2_foxy_analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/pflab/ros2_foxy_analysis/install/pubsub
+[0.054s] -- The C compiler identification is GNU 9.3.0
+[0.101s] -- The CXX compiler identification is GNU 9.3.0
+[0.107s] -- Detecting C compiler ABI info
+[0.147s] -- Detecting C compiler ABI info - done
+[0.154s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.154s] -- Detecting C compile features
+[0.154s] -- Detecting C compile features - done
+[0.156s] -- Detecting CXX compiler ABI info
+[0.207s] -- Detecting CXX compiler ABI info - done
+[0.216s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.216s] -- Detecting CXX compile features
+[0.216s] -- Detecting CXX compile features - done
+[0.218s] -- Found ament_cmake: 0.9.8 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.239s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.5", minimum required is "3") 
+[0.239s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.428s] -- Found rclcpp: 2.3.0 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.464s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.470s] -- Found rosidl_adapter: 1.2.0 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.523s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.540s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.595s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.636s] -- Found rmw_implementation_cmake: 1.0.2 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.637s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.638s] -- Looking for pthread.h
+[0.683s] -- Looking for pthread.h - found
+[0.683s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.735s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[0.736s] -- Looking for pthread_create in pthreads
+[0.767s] -- Looking for pthread_create in pthreads - not found
+[0.767s] -- Looking for pthread_create in pthread
+[0.807s] -- Looking for pthread_create in pthread - found
+[0.808s] -- Found Threads: TRUE  
+[0.967s] -- Configuring done
+[0.974s] -- Generating done
+[0.975s] -- Build files have been written to: /home/pflab/ros2_foxy_analysis/build/pubsub
+[0.981s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake /home/pflab/ros2_foxy_analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/pflab/ros2_foxy_analysis/install/pubsub
+[0.985s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12
+[0.999s] [35m[1mScanning dependencies of target listener[0m
+[0.999s] [35m[1mScanning dependencies of target talker[0m
+[1.007s] [ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[1.007s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[1.108s] [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/publisher_member_function.cpp:20:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/Int32MultiArray.hpp: そのようなファイルやディレクトリはありません
+[1.108s]    20 | #include [01;31m[K"std_msgs/msg/Int32MultiArray.hpp"[m[K
+[1.108s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[1.108s] compilation terminated.
+[1.108s] [01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:19:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/Int32MultiArray.hpp: そのようなファイルやディレクトリはありません
+[1.108s]    19 | #include [01;31m[K"std_msgs/msg/Int32MultiArray.hpp"[m[K
+[1.108s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[1.108s] compilation terminated.
+[1.109s] make[2]: *** [CMakeFiles/listener.dir/build.make:82: CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o] エラー 1
+[1.110s] make[2]: *** [CMakeFiles/talker.dir/build.make:82: CMakeFiles/talker.dir/src/publisher_member_function.cpp.o] エラー 1
+[1.110s] make[1]: *** [CMakeFiles/Makefile2:126: CMakeFiles/talker.dir/all] エラー 2
+[1.110s] make[1]: *** 未完了のジョブを待っています....
+[1.110s] make[1]: *** [CMakeFiles/Makefile2:99: CMakeFiles/listener.dir/all] エラー 2
+[1.110s] make: *** [Makefile:160: all] エラー 2
+[1.111s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12

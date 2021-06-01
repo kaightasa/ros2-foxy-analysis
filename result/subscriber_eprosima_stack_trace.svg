@@ -1,0 +1,860 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="486" onload="init(evt)" viewBox="0 0 1200 486" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
+<!-- NOTES:  -->
+<defs>
+	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
+		<stop stop-color="#eeeeee" offset="5%" />
+		<stop stop-color="#eeeeb0" offset="95%" />
+	</linearGradient>
+</defs>
+<style type="text/css">
+	text { font-family:Verdana; font-size:12px; fill:rgb(0,0,0); }
+	#search, #ignorecase { opacity:0.1; cursor:pointer; }
+	#search:hover, #search.show, #ignorecase:hover, #ignorecase.show { opacity:1; }
+	#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+	#title { text-anchor:middle; font-size:17px}
+	#unzoom { cursor:pointer; }
+	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	.hide { display:none; }
+	.parent { opacity:0.5; }
+</style>
+<script type="text/ecmascript">
+<![CDATA[
+	"use strict";
+	var details, searchbtn, unzoombtn, matchedtxt, svg, searching, currentSearchTerm, ignorecase, ignorecaseBtn;
+	function init(evt) {
+		details = document.getElementById("details").firstChild;
+		searchbtn = document.getElementById("search");
+		ignorecaseBtn = document.getElementById("ignorecase");
+		unzoombtn = document.getElementById("unzoom");
+		matchedtxt = document.getElementById("matched");
+		svg = document.getElementsByTagName("svg")[0];
+		searching = 0;
+		currentSearchTerm = null;
+	}
+
+	window.addEventListener("click", function(e) {
+		var target = find_group(e.target);
+		if (target) {
+			if (target.nodeName == "a") {
+				if (e.ctrlKey === false) return;
+				e.preventDefault();
+			}
+			if (target.classList.contains("parent")) unzoom();
+			zoom(target);
+		}
+		else if (e.target.id == "unzoom") unzoom();
+		else if (e.target.id == "search") search_prompt();
+		else if (e.target.id == "ignorecase") toggle_ignorecase();
+	}, false)
+
+	// mouse-over for info
+	// show
+	window.addEventListener("mouseover", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = "Function: " + g_to_text(target);
+	}, false)
+
+	// clear
+	window.addEventListener("mouseout", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = ' ';
+	}, false)
+
+	// ctrl-F for search
+	window.addEventListener("keydown",function (e) {
+		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+			e.preventDefault();
+			search_prompt();
+		}
+	}, false)
+
+	// ctrl-I to toggle case-sensitive search
+	window.addEventListener("keydown",function (e) {
+		if (e.ctrlKey && e.keyCode === 73) {
+			e.preventDefault();
+			toggle_ignorecase();
+		}
+	}, false)
+
+	// functions
+	function find_child(node, selector) {
+		var children = node.querySelectorAll(selector);
+		if (children.length) return children[0];
+		return;
+	}
+	function find_group(node) {
+		var parent = node.parentElement;
+		if (!parent) return;
+		if (parent.id == "frames") return node;
+		return find_group(parent);
+	}
+	function orig_save(e, attr, val) {
+		if (e.attributes["_orig_" + attr] != undefined) return;
+		if (e.attributes[attr] == undefined) return;
+		if (val == undefined) val = e.attributes[attr].value;
+		e.setAttribute("_orig_" + attr, val);
+	}
+	function orig_load(e, attr) {
+		if (e.attributes["_orig_"+attr] == undefined) return;
+		e.attributes[attr].value = e.attributes["_orig_" + attr].value;
+		e.removeAttribute("_orig_"+attr);
+	}
+	function g_to_text(e) {
+		var text = find_child(e, "title").firstChild.nodeValue;
+		return (text)
+	}
+	function g_to_func(e) {
+		var func = g_to_text(e);
+		// if there's any manipulation we want to do to the function
+		// name before it's searched, do it here before returning.
+		return (func);
+	}
+	function update_text(e) {
+		var r = find_child(e, "rect");
+		var t = find_child(e, "text");
+		var w = parseFloat(r.attributes.width.value) -3;
+		var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+		t.attributes.x.value = parseFloat(r.attributes.x.value) + 3;
+
+		// Smaller than this size won't fit anything
+		if (w < 2 * 12 * 0.59) {
+			t.textContent = "";
+			return;
+		}
+
+		t.textContent = txt;
+		// Fit in full text width
+		if (/^ *$/.test(txt) || t.getSubStringLength(0, txt.length) < w)
+			return;
+
+		for (var x = txt.length - 2; x > 0; x--) {
+			if (t.getSubStringLength(0, x + 2) <= w) {
+				t.textContent = txt.substring(0, x) + "..";
+				return;
+			}
+		}
+		t.textContent = "";
+	}
+
+	// zoom
+	function zoom_reset(e) {
+		if (e.attributes != undefined) {
+			orig_load(e, "x");
+			orig_load(e, "width");
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_reset(c[i]);
+		}
+	}
+	function zoom_child(e, x, ratio) {
+		if (e.attributes != undefined) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = (parseFloat(e.attributes.x.value) - x - 10) * ratio + 10;
+				if (e.tagName == "text")
+					e.attributes.x.value = find_child(e.parentNode, "rect[x]").attributes.x.value + 3;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseFloat(e.attributes.width.value) * ratio;
+			}
+		}
+
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_child(c[i], x - 10, ratio);
+		}
+	}
+	function zoom_parent(e) {
+		if (e.attributes) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = 10;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseInt(svg.width.baseVal.value) - (10 * 2);
+			}
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_parent(c[i]);
+		}
+	}
+	function zoom(node) {
+		var attr = find_child(node, "rect").attributes;
+		var width = parseFloat(attr.width.value);
+		var xmin = parseFloat(attr.x.value);
+		var xmax = parseFloat(xmin + width);
+		var ymin = parseFloat(attr.y.value);
+		var ratio = (svg.width.baseVal.value - 2 * 10) / width;
+
+		// XXX: Workaround for JavaScript float issues (fix me)
+		var fudge = 0.0001;
+
+		unzoombtn.classList.remove("hide");
+
+		var el = document.getElementById("frames").children;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var a = find_child(e, "rect").attributes;
+			var ex = parseFloat(a.x.value);
+			var ew = parseFloat(a.width.value);
+			var upstack;
+			// Is it an ancestor
+			if (0 == 0) {
+				upstack = parseFloat(a.y.value) > ymin;
+			} else {
+				upstack = parseFloat(a.y.value) < ymin;
+			}
+			if (upstack) {
+				// Direct ancestor
+				if (ex <= xmin && (ex+ew+fudge) >= xmax) {
+					e.classList.add("parent");
+					zoom_parent(e);
+					update_text(e);
+				}
+				// not in current path
+				else
+					e.classList.add("hide");
+			}
+			// Children maybe
+			else {
+				// no common path
+				if (ex < xmin || ex + fudge >= xmax) {
+					e.classList.add("hide");
+				}
+				else {
+					zoom_child(e, xmin, ratio);
+					update_text(e);
+				}
+			}
+		}
+		search();
+	}
+	function unzoom() {
+		unzoombtn.classList.add("hide");
+		var el = document.getElementById("frames").children;
+		for(var i = 0; i < el.length; i++) {
+			el[i].classList.remove("parent");
+			el[i].classList.remove("hide");
+			zoom_reset(el[i]);
+			update_text(el[i]);
+		}
+		search();
+	}
+
+	// search
+	function toggle_ignorecase() {
+		ignorecase = !ignorecase;
+		if (ignorecase) {
+			ignorecaseBtn.classList.add("show");
+		} else {
+			ignorecaseBtn.classList.remove("show");
+		}
+		reset_search();
+		search();
+	}
+	function reset_search() {
+		var el = document.querySelectorAll("#frames rect");
+		for (var i = 0; i < el.length; i++) {
+			orig_load(el[i], "fill")
+		}
+	}
+	function search_prompt() {
+		if (!searching) {
+			var term = prompt("Enter a search term (regexp " +
+			    "allowed, eg: ^ext4_)"
+			    + (ignorecase ? ", ignoring case" : "")
+			    + "\nPress Ctrl-i to toggle case sensitivity", "");
+			if (term != null) {
+				currentSearchTerm = term;
+				search();
+			}
+		} else {
+			reset_search();
+			searching = 0;
+			currentSearchTerm = null;
+			searchbtn.classList.remove("show");
+			searchbtn.firstChild.nodeValue = "Search"
+			matchedtxt.classList.add("hide");
+			matchedtxt.firstChild.nodeValue = ""
+		}
+	}
+	function search(term) {
+		if (currentSearchTerm === null) return;
+		var term = currentSearchTerm;
+
+		var re = new RegExp(term, ignorecase ? 'i' : '');
+		var el = document.getElementById("frames").children;
+		var matches = new Object();
+		var maxwidth = 0;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var func = g_to_func(e);
+			var rect = find_child(e, "rect");
+			if (func == null || rect == null)
+				continue;
+
+			// Save max width. Only works as we have a root frame
+			var w = parseFloat(rect.attributes.width.value);
+			if (w > maxwidth)
+				maxwidth = w;
+
+			if (func.match(re)) {
+				// highlight
+				var x = parseFloat(rect.attributes.x.value);
+				orig_save(rect, "fill");
+				rect.attributes.fill.value = "rgb(230,0,230)";
+
+				// remember matches
+				if (matches[x] == undefined) {
+					matches[x] = w;
+				} else {
+					if (w > matches[x]) {
+						// overwrite with parent
+						matches[x] = w;
+					}
+				}
+				searching = 1;
+			}
+		}
+		if (!searching)
+			return;
+
+		searchbtn.classList.add("show");
+		searchbtn.firstChild.nodeValue = "Reset Search";
+
+		// calculate percent matched, excluding vertical overlap
+		var count = 0;
+		var lastx = -1;
+		var lastw = 0;
+		var keys = Array();
+		for (k in matches) {
+			if (matches.hasOwnProperty(k))
+				keys.push(k);
+		}
+		// sort the matched frames by their x location
+		// ascending, then width descending
+		keys.sort(function(a, b){
+			return a - b;
+		});
+		// Step through frames saving only the biggest bottom-up frames
+		// thanks to the sort order. This relies on the tree property
+		// where children are always smaller than their parents.
+		var fudge = 0.0001;	// JavaScript floating point
+		for (var k in keys) {
+			var x = parseFloat(keys[k]);
+			var w = matches[keys[k]];
+			if (x >= lastx + lastw - fudge) {
+				count += w;
+				lastx = x;
+				lastw = w;
+			}
+		}
+		// display matched percent
+		matchedtxt.classList.remove("hide");
+		var pct = 100 * count / maxwidth;
+		if (pct != 100) pct = pct.toFixed(1)
+		matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+	}
+]]>
+</script>
+<rect x="0.0" y="0" width="1200.0" height="486.0" fill="url(#background)"  />
+<text id="title" x="600.00" y="24" >Flame Graph</text>
+<text id="details" x="10.00" y="469" > </text>
+<text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
+<text id="search" x="1090.00" y="24" >Search</text>
+<text id="ignorecase" x="1174.00" y="24" >ic</text>
+<text id="matched" x="1090.00" y="469" > </text>
+<g id="frames">
+<g >
+<title>eprosima::fastcdr::Cdr::deserializeArray (1 samples, 1.27%)</title><rect x="219.1" y="341" width="15.0" height="15.0" fill="rgb(214,24,9)" rx="2" ry="2" />
+<text  x="222.11" y="351.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::ResourceLimitedVector&lt;eprosima::fastrtps::rtps::LocatorSelectorEntry*, std::integral_constant&lt;bool, false&gt;, eprosima::fastrtps::ResourceLimitedContainerConfig, std::allocator&lt;eprosima::fastrtps::rtps::LocatorSelectorEntry*&gt;, std::vector&lt;eprosima::fastrtps::rtps::LocatorSelectorEntry*, std::allocator&lt;eprosima::fastrtps::rtps::LocatorSelectorEntry*&gt; &gt; &gt;::~ResourceLimitedVector (3 samples, 3.80%)</title><rect x="622.4" y="389" width="44.8" height="15.0" fill="rgb(244,18,26)" rx="2" ry="2" />
+<text  x="625.41" y="399.5" >epro..</text>
+</g>
+<g >
+<title>[libfastrtps.so.2.0.2] (1 samples, 1.27%)</title><rect x="293.8" y="357" width="14.9" height="15.0" fill="rgb(226,222,33)" rx="2" ry="2" />
+<text  x="296.80" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (71 samples, 89.87%)</title><rect x="54.8" y="405" width="1060.5" height="15.0" fill="rgb(239,117,26)" rx="2" ry="2" />
+<text  x="57.81" y="415.5" >[unknown]</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemGlobal::Port::try_push (1 samples, 1.27%)</title><rect x="249.0" y="389" width="14.9" height="15.0" fill="rgb(236,209,32)" rx="2" ry="2" />
+<text  x="251.99" y="399.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::StatefulReader::send_sync_nts (1 samples, 1.27%)</title><rect x="144.4" y="373" width="15.0" height="15.0" fill="rgb(244,133,44)" rx="2" ry="2" />
+<text  x="147.43" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::ResourceEvent::update_current_time (1 samples, 1.27%)</title><rect x="114.6" y="373" width="14.9" height="15.0" fill="rgb(226,47,1)" rx="2" ry="2" />
+<text  x="117.56" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::ResourceEvent::do_timer_actions (1 samples, 1.27%)</title><rect x="99.6" y="373" width="15.0" height="15.0" fill="rgb(254,143,12)" rx="2" ry="2" />
+<text  x="102.62" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemGlobal::Port::wait_pop (1 samples, 1.27%)</title><rect x="263.9" y="389" width="15.0" height="15.0" fill="rgb(225,11,42)" rx="2" ry="2" />
+<text  x="266.92" y="399.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::RTPSReader::update_last_notified (1 samples, 1.27%)</title><rect x="921.1" y="389" width="15.0" height="15.0" fill="rgb(216,218,4)" rx="2" ry="2" />
+<text  x="924.14" y="399.5" ></text>
+</g>
+<g >
+<title>[unknown] (1 samples, 1.27%)</title><rect x="741.9" y="373" width="14.9" height="15.0" fill="rgb(222,67,21)" rx="2" ry="2" />
+<text  x="744.90" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::UDPv4Transport::endpoint_to_locator (1 samples, 1.27%)</title><rect x="607.5" y="357" width="14.9" height="15.0" fill="rgb(231,174,42)" rx="2" ry="2" />
+<text  x="610.47" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::SubscriberHistory::takeNextData (1 samples, 1.27%)</title><rect x="697.1" y="357" width="14.9" height="15.0" fill="rgb(216,82,3)" rx="2" ry="2" />
+<text  x="700.09" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastcdr::FastBuffer::~FastBuffer (4 samples, 5.06%)</title><rect x="189.2" y="389" width="59.8" height="15.0" fill="rgb(252,172,50)" rx="2" ry="2" />
+<text  x="192.24" y="399.5" >eprosi..</text>
+</g>
+<g >
+<title>__gnu_cxx::__exchange_and_add_dispatch (1 samples, 1.27%)</title><rect x="308.7" y="325" width="15.0" height="15.0" fill="rgb(216,4,4)" rx="2" ry="2" />
+<text  x="311.73" y="335.5" ></text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="1070.5" y="341" width="44.8" height="15.0" fill="rgb(219,176,17)" rx="2" ry="2" />
+<text  x="1073.51" y="351.5" >[unk..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemManager::Segment::alloc_buffer (1 samples, 1.27%)</title><rect x="278.9" y="389" width="14.9" height="15.0" fill="rgb(228,197,2)" rx="2" ry="2" />
+<text  x="281.86" y="399.5" ></text>
+</g>
+<g >
+<title>__skb_recv_udp (13 samples, 16.46%)</title><rect x="413.3" y="197" width="194.2" height="15.0" fill="rgb(242,140,25)" rx="2" ry="2" />
+<text  x="416.29" y="207.5" >__skb_recv_udp</text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="622.4" y="373" width="44.8" height="15.0" fill="rgb(242,220,38)" rx="2" ry="2" />
+<text  x="625.41" y="383.5" >[unk..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::change_removed_from_history (1 samples, 1.27%)</title><rect x="980.9" y="389" width="14.9" height="15.0" fill="rgb(226,79,6)" rx="2" ry="2" />
+<text  x="983.89" y="399.5" ></text>
+</g>
+<g >
+<title>listener (79 samples, 100.00%)</title><rect x="10.0" y="421" width="1180.0" height="15.0" fill="rgb(248,161,30)" rx="2" ry="2" />
+<text  x="13.00" y="431.5" >listener</text>
+</g>
+<g >
+<title>update_curr (1 samples, 1.27%)</title><rect x="413.3" y="69" width="14.9" height="15.0" fill="rgb(237,14,28)" rx="2" ry="2" />
+<text  x="416.29" y="79.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::readSubmessageHeader (1 samples, 1.27%)</title><rect x="846.5" y="357" width="14.9" height="15.0" fill="rgb(223,13,3)" rx="2" ry="2" />
+<text  x="849.46" y="367.5" ></text>
+</g>
+<g >
+<title>___sys_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="277" width="194.2" height="15.0" fill="rgb(252,47,16)" rx="2" ry="2" />
+<text  x="416.29" y="287.5" >___sys_recvmsg</text>
+</g>
+<g >
+<title>[unknown] (5 samples, 6.33%)</title><rect x="293.8" y="373" width="74.7" height="15.0" fill="rgb(238,114,8)" rx="2" ry="2" />
+<text  x="296.80" y="383.5" >[unknown]</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::Locators::operator== (1 samples, 1.27%)</title><rect x="741.9" y="389" width="14.9" height="15.0" fill="rgb(214,184,1)" rx="2" ry="2" />
+<text  x="744.90" y="399.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::History::find_change_nts (1 samples, 1.27%)</title><rect x="712.0" y="357" width="15.0" height="15.0" fill="rgb(250,200,1)" rx="2" ry="2" />
+<text  x="715.03" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 17.72%)</title><rect x="413.3" y="373" width="209.1" height="15.0" fill="rgb(210,209,32)" rx="2" ry="2" />
+<text  x="416.29" y="383.5" >[unknown]</text>
+</g>
+<g >
+<title>dequeue_task_fair (1 samples, 1.27%)</title><rect x="413.3" y="101" width="14.9" height="15.0" fill="rgb(215,50,4)" rx="2" ry="2" />
+<text  x="416.29" y="111.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::UDPTransportInterface::select_locators (2 samples, 2.53%)</title><rect x="637.3" y="357" width="29.9" height="15.0" fill="rgb(239,60,24)" rx="2" ry="2" />
+<text  x="640.34" y="367.5" >ep..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 2.53%)</title><rect x="383.4" y="373" width="29.9" height="15.0" fill="rgb(252,120,21)" rx="2" ry="2" />
+<text  x="386.42" y="383.5" >[u..</text>
+</g>
+<g >
+<title>schedule (13 samples, 16.46%)</title><rect x="413.3" y="149" width="194.2" height="15.0" fill="rgb(254,67,26)" rx="2" ry="2" />
+<text  x="416.29" y="159.5" >schedule</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 2.53%)</title><rect x="995.8" y="357" width="29.9" height="15.0" fill="rgb(235,11,41)" rx="2" ry="2" />
+<text  x="998.82" y="367.5" >[u..</text>
+</g>
+<g >
+<title>__gnu_cxx::__exchange_and_add_dispatch (1 samples, 1.27%)</title><rect x="323.7" y="309" width="14.9" height="15.0" fill="rgb(231,53,30)" rx="2" ry="2" />
+<text  x="326.67" y="319.5" ></text>
+</g>
+<g >
+<title>____sys_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="261" width="194.2" height="15.0" fill="rgb(226,26,42)" rx="2" ry="2" />
+<text  x="416.29" y="271.5" >____sys_recvmsg</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemChannelResource::perform_listen_operation (2 samples, 2.53%)</title><rect x="338.6" y="357" width="29.9" height="15.0" fill="rgb(216,203,53)" rx="2" ry="2" />
+<text  x="341.61" y="367.5" >ep..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::send (1 samples, 1.27%)</title><rect x="159.4" y="373" width="14.9" height="15.0" fill="rgb(221,108,11)" rx="2" ry="2" />
+<text  x="162.37" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::missing_changes (1 samples, 1.27%)</title><rect x="39.9" y="389" width="14.9" height="15.0" fill="rgb(254,134,43)" rx="2" ry="2" />
+<text  x="42.87" y="399.5" ></text>
+</g>
+<g >
+<title>std::_Sp_counted_ptr_inplace&lt;eprosima::fastdds::rtps::SharedMemManager::SharedMemBuffer, std::allocator&lt;eprosima::fastdds::rtps::SharedMemManager::SharedMemBuffer&gt;,  (1 samples, 1.27%)</title><rect x="353.5" y="341" width="15.0" height="15.0" fill="rgb(240,106,25)" rx="2" ry="2" />
+<text  x="356.54" y="351.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::proc_Submsg_Heartbeat (2 samples, 2.53%)</title><rect x="816.6" y="341" width="29.9" height="15.0" fill="rgb(249,111,40)" rx="2" ry="2" />
+<text  x="819.58" y="351.5" >ep..</text>
+</g>
+<g >
+<title>std::vector&lt;int, std::allocator&lt;int&gt; &gt;::_M_default_append (1 samples, 1.27%)</title><rect x="234.1" y="341" width="14.9" height="15.0" fill="rgb(206,149,38)" rx="2" ry="2" />
+<text  x="237.05" y="351.5" ></text>
+</g>
+<g >
+<title>__gthread_active_p (1 samples, 1.27%)</title><rect x="323.7" y="293" width="14.9" height="15.0" fill="rgb(235,18,28)" rx="2" ry="2" />
+<text  x="326.67" y="303.5" ></text>
+</g>
+<g >
+<title>[unknown] (4 samples, 5.06%)</title><rect x="189.2" y="373" width="59.8" height="15.0" fill="rgb(232,43,23)" rx="2" ry="2" />
+<text  x="192.24" y="383.5" >[unkno..</text>
+</g>
+<g >
+<title>[libfastrtps.so.2.0.2] (1 samples, 1.27%)</title><rect x="951.0" y="357" width="14.9" height="15.0" fill="rgb(235,11,53)" rx="2" ry="2" />
+<text  x="954.01" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::TimedEventImpl::trigger (1 samples, 1.27%)</title><rect x="1160.1" y="405" width="15.0" height="15.0" fill="rgb(206,12,45)" rx="2" ry="2" />
+<text  x="1163.13" y="415.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::checkRTPSHeader (1 samples, 1.27%)</title><rect x="801.6" y="357" width="15.0" height="15.0" fill="rgb(240,154,9)" rx="2" ry="2" />
+<text  x="804.65" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::~WriterProxy (2 samples, 2.53%)</title><rect x="995.8" y="389" width="29.9" height="15.0" fill="rgb(250,214,49)" rx="2" ry="2" />
+<text  x="998.82" y="399.5" >ep..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::StatefulReader::change_received (1 samples, 1.27%)</title><rect x="965.9" y="357" width="15.0" height="15.0" fill="rgb(241,226,32)" rx="2" ry="2" />
+<text  x="968.95" y="367.5" ></text>
+</g>
+<g >
+<title>inet_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="229" width="194.2" height="15.0" fill="rgb(244,122,48)" rx="2" ry="2" />
+<text  x="416.29" y="239.5" >inet_recvmsg</text>
+</g>
+<g >
+<title>eprosima::fastrtps::SubscriberHistory::takeNextData (1 samples, 1.27%)</title><rect x="84.7" y="373" width="14.9" height="15.0" fill="rgb(234,114,38)" rx="2" ry="2" />
+<text  x="87.68" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemManager::SharedMemBuffer::~SharedMemBuffer (5 samples, 6.33%)</title><rect x="293.8" y="389" width="74.7" height="15.0" fill="rgb(232,137,52)" rx="2" ry="2" />
+<text  x="296.80" y="399.5" >eprosima..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::SubscriberHistory::remove_change_sub (1 samples, 1.27%)</title><rect x="682.2" y="357" width="14.9" height="15.0" fill="rgb(229,159,11)" rx="2" ry="2" />
+<text  x="685.15" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (9 samples, 11.39%)</title><rect x="54.8" y="389" width="134.4" height="15.0" fill="rgb(220,20,22)" rx="2" ry="2" />
+<text  x="57.81" y="399.5" >[unknown]</text>
+</g>
+<g >
+<title>schedule_timeout (13 samples, 16.46%)</title><rect x="413.3" y="165" width="194.2" height="15.0" fill="rgb(247,122,43)" rx="2" ry="2" />
+<text  x="416.29" y="175.5" >schedule_timeout</text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="1070.5" y="357" width="44.8" height="15.0" fill="rgb(213,69,44)" rx="2" ry="2" />
+<text  x="1073.51" y="367.5" >[unk..</text>
+</g>
+<g >
+<title>__libc_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="357" width="194.2" height="15.0" fill="rgb(243,163,17)" rx="2" ry="2" />
+<text  x="416.29" y="367.5" >__libc_recvmsg</text>
+</g>
+<g >
+<title>[libstdc++.so.6.0.28] (1 samples, 1.27%)</title><rect x="1070.5" y="309" width="14.9" height="15.0" fill="rgb(224,220,19)" rx="2" ry="2" />
+<text  x="1073.51" y="319.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::UDPChannelResource::~UDPChannelResource (14 samples, 17.72%)</title><rect x="413.3" y="389" width="209.1" height="15.0" fill="rgb(219,202,33)" rx="2" ry="2" />
+<text  x="416.29" y="399.5" >eprosima::fastdds::rtps::UD..</text>
+</g>
+<g >
+<title>__sched_text_start (13 samples, 16.46%)</title><rect x="413.3" y="133" width="194.2" height="15.0" fill="rgb(251,188,38)" rx="2" ry="2" />
+<text  x="416.29" y="143.5" >__sched_text_start</text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (2 samples, 2.53%)</title><rect x="995.8" y="341" width="29.9" height="15.0" fill="rgb(230,176,47)" rx="2" ry="2" />
+<text  x="998.82" y="351.5" >__..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::perform_heartbeat_response (1 samples, 1.27%)</title><rect x="1175.1" y="405" width="14.9" height="15.0" fill="rgb(234,31,5)" rx="2" ry="2" />
+<text  x="1178.06" y="415.5" ></text>
+</g>
+<g >
+<title>do_syscall_64 (13 samples, 16.46%)</title><rect x="413.3" y="325" width="194.2" height="15.0" fill="rgb(227,47,43)" rx="2" ry="2" />
+<text  x="416.29" y="335.5" >do_syscall_64</text>
+</g>
+<g >
+<title>[librmw_fastrtps_cpp.so] (1 samples, 1.27%)</title><rect x="189.2" y="357" width="15.0" height="15.0" fill="rgb(214,94,24)" rx="2" ry="2" />
+<text  x="192.24" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::StatefulReader::change_removed_by_history (1 samples, 1.27%)</title><rect x="129.5" y="373" width="14.9" height="15.0" fill="rgb(214,159,13)" rx="2" ry="2" />
+<text  x="132.49" y="383.5" ></text>
+</g>
+<g >
+<title>[unknown] (10 samples, 12.66%)</title><rect x="771.8" y="373" width="149.3" height="15.0" fill="rgb(242,76,39)" rx="2" ry="2" />
+<text  x="774.77" y="383.5" >[unknown]</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::security::SecurityManager::decode_rtps_message (2 samples, 2.53%)</title><rect x="891.3" y="357" width="29.8" height="15.0" fill="rgb(250,167,32)" rx="2" ry="2" />
+<text  x="894.27" y="367.5" >ep..</text>
+</g>
+<g >
+<title>sock_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="245" width="194.2" height="15.0" fill="rgb(238,97,25)" rx="2" ry="2" />
+<text  x="416.29" y="255.5" >sock_recvmsg</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::Time_t::Time_t (1 samples, 1.27%)</title><rect x="876.3" y="357" width="15.0" height="15.0" fill="rgb(249,176,39)" rx="2" ry="2" />
+<text  x="879.33" y="367.5" ></text>
+</g>
+<g >
+<title>intel_pmu_enable_all (10 samples, 12.66%)</title><rect x="458.1" y="53" width="149.4" height="15.0" fill="rgb(214,58,31)" rx="2" ry="2" />
+<text  x="461.10" y="63.5" >intel_pmu_enable_all</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::send (1 samples, 1.27%)</title><rect x="398.4" y="357" width="14.9" height="15.0" fill="rgb(250,123,53)" rx="2" ry="2" />
+<text  x="401.35" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::processCDRMsg (2 samples, 2.53%)</title><rect x="816.6" y="357" width="29.9" height="15.0" fill="rgb(239,42,24)" rx="2" ry="2" />
+<text  x="819.58" y="367.5" >ep..</text>
+</g>
+<g >
+<title>std::_Hashtable&lt;eprosima::fastdds::rtps::UUID&lt;8ul&gt;, std::pair&lt;eprosima::fastdds::rtps::UUID&lt;8ul&gt; const, std::shared_ptr&lt;eprosima::fastdds::rtps::SharedMemManager::SegmentWrapper&gt; &gt;, std::allocator&lt;std::pair&lt;eprosima::fastdds::rtps::UUID&lt;8ul&gt; const, std::shared_ptr&lt;eprosima::fastdds::rtps::SharedMemManager::SegmentWrapper&gt; &gt; &gt;, std::__detail::_Select1st, std::equal_to&lt;eprosima::fastdds::rtps::UUID&lt;8ul&gt; &gt;, std::hash&lt;eprosima::fastdds::rtps::UUID&lt;8ul&gt; &gt;, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits&lt;true, false, true&gt; &gt;::_M_find_before_node (2 samples, 2.53%)</title><rect x="1115.3" y="389" width="29.9" height="15.0" fill="rgb(251,58,39)" rx="2" ry="2" />
+<text  x="1118.32" y="399.5" >st..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::reset (1 samples, 1.27%)</title><rect x="861.4" y="357" width="14.9" height="15.0" fill="rgb(216,21,40)" rx="2" ry="2" />
+<text  x="864.39" y="367.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::History::get_change_nts (1 samples, 1.27%)</title><rect x="727.0" y="357" width="14.9" height="15.0" fill="rgb(216,137,48)" rx="2" ry="2" />
+<text  x="729.96" y="367.5" ></text>
+</g>
+<g >
+<title>std::vector&lt;eprosima::fastrtps::rtps::TimedEventImpl*, std::allocator&lt;eprosima::fastrtps::rtps::TimedEventImpl*&gt; &gt;::reserve (1 samples, 1.27%)</title><rect x="174.3" y="373" width="14.9" height="15.0" fill="rgb(231,174,5)" rx="2" ry="2" />
+<text  x="177.30" y="383.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::~SharedMemTransport (2 samples, 2.53%)</title><rect x="383.4" y="389" width="29.9" height="15.0" fill="rgb(241,213,5)" rx="2" ry="2" />
+<text  x="386.42" y="399.5" >ep..</text>
+</g>
+<g >
+<title>__vdso_clock_gettime (2 samples, 2.53%)</title><rect x="1115.3" y="405" width="29.9" height="15.0" fill="rgb(209,37,52)" rx="2" ry="2" />
+<text  x="1118.32" y="415.5" >__..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::select_locators (1 samples, 1.27%)</title><rect x="622.4" y="357" width="14.9" height="15.0" fill="rgb(250,92,34)" rx="2" ry="2" />
+<text  x="625.41" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (5 samples, 6.33%)</title><rect x="667.2" y="373" width="74.7" height="15.0" fill="rgb(238,96,3)" rx="2" ry="2" />
+<text  x="670.22" y="383.5" >[unknown]</text>
+</g>
+<g >
+<title>eprosima::fastrtps::SubscriberHistory::received_change_keep_last_no_key (1 samples, 1.27%)</title><rect x="667.2" y="357" width="15.0" height="15.0" fill="rgb(206,93,19)" rx="2" ry="2" />
+<text  x="670.22" y="367.5" ></text>
+</g>
+<g >
+<title>deactivate_task (1 samples, 1.27%)</title><rect x="413.3" y="117" width="14.9" height="15.0" fill="rgb(243,223,5)" rx="2" ry="2" />
+<text  x="416.29" y="127.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::RTPSMessageGroup::add_info_dst_in_buffer (2 samples, 2.53%)</title><rect x="10.0" y="389" width="29.9" height="15.0" fill="rgb(247,7,17)" rx="2" ry="2" />
+<text  x="13.00" y="399.5" >ep..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::SubscriberHistory::~SubscriberHistory (5 samples, 6.33%)</title><rect x="667.2" y="389" width="74.7" height="15.0" fill="rgb(248,221,45)" rx="2" ry="2" />
+<text  x="670.22" y="399.5" >eprosima..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::StatefulReader::~StatefulReader (2 samples, 2.53%)</title><rect x="951.0" y="389" width="29.9" height="15.0" fill="rgb(217,69,54)" rx="2" ry="2" />
+<text  x="954.01" y="399.5" >ep..</text>
+</g>
+<g >
+<title>std::_Sp_counted_base&lt; (1 samples, 1.27%)</title><rect x="323.7" y="325" width="14.9" height="15.0" fill="rgb(215,14,5)" rx="2" ry="2" />
+<text  x="326.67" y="335.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 2.53%)</title><rect x="308.7" y="357" width="29.9" height="15.0" fill="rgb(243,140,14)" rx="2" ry="2" />
+<text  x="311.73" y="367.5" >[u..</text>
+</g>
+<g >
+<title>cpuacct_charge (1 samples, 1.27%)</title><rect x="413.3" y="53" width="14.9" height="15.0" fill="rgb(241,62,51)" rx="2" ry="2" />
+<text  x="416.29" y="63.5" ></text>
+</g>
+<g >
+<title>[unknown] (2 samples, 2.53%)</title><rect x="995.8" y="373" width="29.9" height="15.0" fill="rgb(218,188,17)" rx="2" ry="2" />
+<text  x="998.82" y="383.5" >[u..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::WriterProxy::process_heartbeat (1 samples, 1.27%)</title><rect x="831.5" y="325" width="15.0" height="15.0" fill="rgb(217,193,22)" rx="2" ry="2" />
+<text  x="834.52" y="335.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::Locators::operator++ (1 samples, 1.27%)</title><rect x="741.9" y="357" width="14.9" height="15.0" fill="rgb(208,45,6)" rx="2" ry="2" />
+<text  x="744.90" y="367.5" ></text>
+</g>
+<g >
+<title>udp_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="213" width="194.2" height="15.0" fill="rgb(232,225,31)" rx="2" ry="2" />
+<text  x="416.29" y="223.5" >udp_recvmsg</text>
+</g>
+<g >
+<title>__memmove_avx_unaligned_erms (1 samples, 1.27%)</title><rect x="204.2" y="341" width="14.9" height="15.0" fill="rgb(228,211,27)" rx="2" ry="2" />
+<text  x="207.18" y="351.5" ></text>
+</g>
+<g >
+<title>std::_Rb_tree&lt;eprosima::fastrtps::rtps::GUID_t, std::pair&lt;eprosima::fastrtps::rtps::GUID_t const, eprosima::fastrtps::rtps::GUID_t&gt;, std::_Select1st&lt;std::pair&lt;eprosima::fastrtps::rtps::GUID_t const, eprosima::fastrtps::rtps::GUID_t&gt; &gt;, std::less&lt;eprosima::fastrtps::rtps::GUID_t&gt;, foonathan::memory::std_allocator&lt;std::pair&lt;eprosima::fastrtps::rtps::GUID_t const, eprosima::fastrtps::rtps::GUID_t&gt;, foonathan::memory::memory_pool&lt;foonathan::memory::node_pool, foonathan::memory::detail::lowlevel_allocator&lt;foonathan::memory::detail::heap_allocator_impl&gt; &gt; &gt; &gt;::find (2 samples, 2.53%)</title><rect x="1040.6" y="389" width="29.9" height="15.0" fill="rgb(246,35,33)" rx="2" ry="2" />
+<text  x="1043.63" y="399.5" >st..</text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="204.2" y="357" width="44.8" height="15.0" fill="rgb(224,204,34)" rx="2" ry="2" />
+<text  x="207.18" y="367.5" >[unk..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemGlobal::Port::wait_pop (2 samples, 2.53%)</title><rect x="1085.4" y="309" width="29.9" height="15.0" fill="rgb(235,215,7)" rx="2" ry="2" />
+<text  x="1088.44" y="319.5" >ep..</text>
+</g>
+<g >
+<title>all (79 samples, 100%)</title><rect x="10.0" y="437" width="1180.0" height="15.0" fill="rgb(239,91,13)" rx="2" ry="2" />
+<text  x="13.00" y="447.5" ></text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemGlobal::Port::try_push (1 samples, 1.27%)</title><rect x="1145.2" y="405" width="14.9" height="15.0" fill="rgb(210,222,6)" rx="2" ry="2" />
+<text  x="1148.19" y="415.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::~MessageReceiver (10 samples, 12.66%)</title><rect x="771.8" y="389" width="149.3" height="15.0" fill="rgb(207,105,31)" rx="2" ry="2" />
+<text  x="774.77" y="399.5" >eprosima::fastrtps:..</text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::ReceiverResource::OnDataReceived (1 samples, 1.27%)</title><rect x="936.1" y="389" width="14.9" height="15.0" fill="rgb(208,87,2)" rx="2" ry="2" />
+<text  x="939.08" y="399.5" ></text>
+</g>
+<g >
+<title>__sys_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="293" width="194.2" height="15.0" fill="rgb(206,188,10)" rx="2" ry="2" />
+<text  x="416.29" y="303.5" >__sys_recvmsg</text>
+</g>
+<g >
+<title>native_write_msr (10 samples, 12.66%)</title><rect x="458.1" y="37" width="149.4" height="15.0" fill="rgb(222,4,40)" rx="2" ry="2" />
+<text  x="461.10" y="47.5" >native_write_msr</text>
+</g>
+<g >
+<title>perf_pmu_enable.part.0 (10 samples, 12.66%)</title><rect x="458.1" y="85" width="149.4" height="15.0" fill="rgb(250,102,14)" rx="2" ry="2" />
+<text  x="461.10" y="95.5" >perf_pmu_enable.par..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::UDPTransportInterface::send (2 samples, 2.53%)</title><rect x="54.8" y="373" width="29.9" height="15.0" fill="rgb(208,206,9)" rx="2" ry="2" />
+<text  x="57.81" y="383.5" >ep..</text>
+</g>
+<g >
+<title>non-virtual thunk to SubListener::onNewDataMessage (1 samples, 1.27%)</title><rect x="1025.7" y="389" width="14.9" height="15.0" fill="rgb(205,44,23)" rx="2" ry="2" />
+<text  x="1028.70" y="399.5" ></text>
+</g>
+<g >
+<title>eprosima::fastrtps::rtps::MessageReceiver::proc_Submsg_InfoTS (1 samples, 1.27%)</title><rect x="756.8" y="389" width="15.0" height="15.0" fill="rgb(241,87,47)" rx="2" ry="2" />
+<text  x="759.84" y="399.5" ></text>
+</g>
+<g >
+<title>finish_task_switch (12 samples, 15.19%)</title><rect x="428.2" y="117" width="179.3" height="15.0" fill="rgb(254,54,0)" rx="2" ry="2" />
+<text  x="431.23" y="127.5" >finish_task_switch</text>
+</g>
+<g >
+<title>x86_pmu_enable (10 samples, 12.66%)</title><rect x="458.1" y="69" width="149.4" height="15.0" fill="rgb(224,134,42)" rx="2" ry="2" />
+<text  x="461.10" y="79.5" >x86_pmu_enable</text>
+</g>
+<g >
+<title>dequeue_entity (1 samples, 1.27%)</title><rect x="413.3" y="85" width="14.9" height="15.0" fill="rgb(242,28,53)" rx="2" ry="2" />
+<text  x="416.29" y="95.5" ></text>
+</g>
+<g >
+<title>__x64_sys_recvmsg (13 samples, 16.46%)</title><rect x="413.3" y="309" width="194.2" height="15.0" fill="rgb(224,222,39)" rx="2" ry="2" />
+<text  x="416.29" y="319.5" >__x64_sys_recvmsg</text>
+</g>
+<g >
+<title>std::_Sp_counted_ptr_inplace&lt;eprosima::fastdds::rtps::SharedMemGlobal::Port::WatchTask::PortContext, std::allocator&lt;eprosima::fastdds::rtps::SharedMemGlobal::Port::WatchTask::PortContext&gt;,  (3 samples, 3.80%)</title><rect x="1070.5" y="389" width="44.8" height="15.0" fill="rgb(245,205,17)" rx="2" ry="2" />
+<text  x="1073.51" y="399.5" >std:..</text>
+</g>
+<g >
+<title>__skb_wait_for_more_packets (13 samples, 16.46%)</title><rect x="413.3" y="181" width="194.2" height="15.0" fill="rgb(212,201,41)" rx="2" ry="2" />
+<text  x="416.29" y="191.5" >__skb_wait_for_more_packets</text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="1070.5" y="325" width="44.8" height="15.0" fill="rgb(213,159,46)" rx="2" ry="2" />
+<text  x="1073.51" y="335.5" >[unk..</text>
+</g>
+<g >
+<title>[unknown] (2 samples, 2.53%)</title><rect x="951.0" y="373" width="29.9" height="15.0" fill="rgb(213,48,38)" rx="2" ry="2" />
+<text  x="954.01" y="383.5" >[u..</text>
+</g>
+<g >
+<title>__pthread_mutex_lock (2 samples, 2.53%)</title><rect x="771.8" y="357" width="29.8" height="15.0" fill="rgb(221,26,40)" rx="2" ry="2" />
+<text  x="774.77" y="367.5" >__..</text>
+</g>
+<g >
+<title>entry_SYSCALL_64_after_hwframe (13 samples, 16.46%)</title><rect x="413.3" y="341" width="194.2" height="15.0" fill="rgb(247,63,28)" rx="2" ry="2" />
+<text  x="416.29" y="351.5" >entry_SYSCALL_64_after_hw..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::push_discard (1 samples, 1.27%)</title><rect x="383.4" y="357" width="15.0" height="15.0" fill="rgb(215,122,24)" rx="2" ry="2" />
+<text  x="386.42" y="367.5" ></text>
+</g>
+<g >
+<title>[unknown] (3 samples, 3.80%)</title><rect x="1070.5" y="373" width="44.8" height="15.0" fill="rgb(212,2,17)" rx="2" ry="2" />
+<text  x="1073.51" y="383.5" >[unk..</text>
+</g>
+<g >
+<title>__perf_event_task_sched_in (12 samples, 15.19%)</title><rect x="428.2" y="101" width="179.3" height="15.0" fill="rgb(254,152,36)" rx="2" ry="2" />
+<text  x="431.23" y="111.5" >__perf_event_task_sched..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::push_discard (2 samples, 2.53%)</title><rect x="308.7" y="341" width="29.9" height="15.0" fill="rgb(216,128,49)" rx="2" ry="2" />
+<text  x="311.73" y="351.5" >ep..</text>
+</g>
+<g >
+<title>eprosima::fastdds::rtps::SharedMemTransport::copy_to_shared_buffer (1 samples, 1.27%)</title><rect x="368.5" y="389" width="14.9" height="15.0" fill="rgb(236,0,2)" rx="2" ry="2" />
+<text  x="371.48" y="399.5" ></text>
+</g>
+<g >
+<title>[libfastrtps.so.2.0.2] (3 samples, 3.80%)</title><rect x="10.0" y="405" width="44.8" height="15.0" fill="rgb(253,46,48)" rx="2" ry="2" />
+<text  x="13.00" y="415.5" >[lib..</text>
+</g>
+</g>
+</svg>

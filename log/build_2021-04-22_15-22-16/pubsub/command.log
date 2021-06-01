@@ -1,0 +1,6 @@
+Invoking command in '/home/pflab/ros2_analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/pflab/ros2_analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/pflab/ros2_analysis/install/pubsub
+Invoked command in '/home/pflab/ros2_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/pflab/ros2_analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/pflab/ros2_analysis/install/pubsub
+Invoking command in '/home/pflab/ros2_analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_analysis/build/pubsub -- -j12 -l12
+Invoked command in '/home/pflab/ros2_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_analysis/build/pubsub -- -j12 -l12
+Invoking command in '/home/pflab/ros2_analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_analysis/build/pubsub
+Invoked command in '/home/pflab/ros2_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_analysis/build/pubsub

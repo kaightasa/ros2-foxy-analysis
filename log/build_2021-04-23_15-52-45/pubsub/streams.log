@@ -1,0 +1,32 @@
+[0.015s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12
+[0.054s] [35m[1mScanning dependencies of target talker[0m
+[0.054s] [35m[1mScanning dependencies of target listener[0m
+[0.061s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[0.061s] [ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[2.285s] [ 75%] [32m[1mLinking CXX executable talker[0m
+[2.399s] [ 75%] Built target talker
+[3.450s] [100%] [32m[1mLinking CXX executable listener[0m
+[3.575s] [100%] Built target listener
+[3.578s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --build /home/pflab/ros2_foxy_analysis/build/pubsub -- -j12 -l12
+[3.593s] Invoking command in '/home/pflab/ros2_foxy_analysis/build/pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_foxy_analysis/build/pubsub
+[3.595s] -- Install configuration: ""
+[3.595s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/talker
+[3.596s] -- Set runtime path of "/home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/talker" to ""
+[3.596s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+[3.597s] -- Set runtime path of "/home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener" to ""
+[3.597s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/package_run_dependencies/pubsub
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/parent_prefix_path/pubsub
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.sh
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.dsv
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/path.sh
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/environment/path.dsv
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.bash
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.sh
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.zsh
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/local_setup.dsv
+[3.598s] -- Installing: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/package.dsv
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/ament_index/resource_index/packages/pubsub
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/cmake/pubsubConfig.cmake
+[3.598s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/cmake/pubsubConfig-version.cmake
+[3.599s] -- Up-to-date: /home/pflab/ros2_foxy_analysis/install/pubsub/share/pubsub/package.xml
+[3.600s] Invoked command in '/home/pflab/ros2_foxy_analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/foxy /usr/local/bin/cmake --install /home/pflab/ros2_foxy_analysis/build/pubsub

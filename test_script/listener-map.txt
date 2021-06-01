@@ -1,0 +1,262 @@
+557f08310000-557f08328000 r--p 00000000 103:06 4080501                   /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+557f08328000-557f0836e000 r-xp 00018000 103:06 4080501                   /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+557f0836e000-557f0839b000 r--p 0005e000 103:06 4080501                   /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+557f0839b000-557f0839e000 r--p 0008a000 103:06 4080501                   /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+557f0839e000-557f0839f000 rw-p 0008d000 103:06 4080501                   /home/pflab/ros2_foxy_analysis/install/pubsub/lib/pubsub/listener
+557f090a9000-557f09151000 rw-p 00000000 00:00 0                          [heap]
+7fc4cc000000-7fc4cc021000 rw-p 00000000 00:00 0 
+7fc4cc021000-7fc4d0000000 ---p 00000000 00:00 0 
+7fc4d0000000-7fc4d0021000 rw-p 00000000 00:00 0 
+7fc4d0021000-7fc4d4000000 ---p 00000000 00:00 0 
+7fc4d77ff000-7fc4d7800000 ---p 00000000 00:00 0 
+7fc4d7800000-7fc4d8000000 rw-p 00000000 00:00 0 
+7fc4d8000000-7fc4d8021000 rw-p 00000000 00:00 0 
+7fc4d8021000-7fc4dc000000 ---p 00000000 00:00 0 
+7fc4dc000000-7fc4dc021000 rw-p 00000000 00:00 0 
+7fc4dc021000-7fc4e0000000 ---p 00000000 00:00 0 
+7fc4e0000000-7fc4e0021000 rw-p 00000000 00:00 0 
+7fc4e0021000-7fc4e4000000 ---p 00000000 00:00 0 
+7fc4e4000000-7fc4e4021000 rw-p 00000000 00:00 0 
+7fc4e4021000-7fc4e8000000 ---p 00000000 00:00 0 
+7fc4e8000000-7fc4e8021000 rw-p 00000000 00:00 0 
+7fc4e8021000-7fc4ec000000 ---p 00000000 00:00 0 
+7fc4ec0cf000-7fc4ec0d8000 r--p 00000000 103:06 7613104                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+7fc4ec0d8000-7fc4ec0db000 r-xp 00009000 103:06 7613104                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+7fc4ec0db000-7fc4ec0de000 r--p 0000c000 103:06 7613104                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+7fc4ec0de000-7fc4ec0e0000 r--p 0000e000 103:06 7613104                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e0000-7fc4ec0e1000 rw-p 00010000 103:06 7613104                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e1000-7fc4ec0e2000 r--p 00000000 103:06 7612579                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e2000-7fc4ec0e3000 r-xp 00001000 103:06 7612579                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e3000-7fc4ec0e4000 r--p 00002000 103:06 7612579                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e4000-7fc4ec0e5000 r--p 00002000 103:06 7612579                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e5000-7fc4ec0e6000 rw-p 00003000 103:06 7612579                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0e6000-7fc4ec0f2000 r--p 00000000 103:06 7612983                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0f2000-7fc4ec0f9000 r-xp 0000c000 103:06 7612983                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0f9000-7fc4ec0fd000 r--p 00013000 103:06 7612983                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0fd000-7fc4ec0ff000 r--p 00016000 103:06 7612983                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec0ff000-7fc4ec101000 rw-p 00018000 103:06 7612983                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+7fc4ec101000-7fc4ec102000 r--p 00000000 103:06 7612578                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+7fc4ec102000-7fc4ec103000 r-xp 00001000 103:06 7612578                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+7fc4ec103000-7fc4ec104000 r--p 00002000 103:06 7612578                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+7fc4ec104000-7fc4ec105000 r--p 00002000 103:06 7612578                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+7fc4ec105000-7fc4ec106000 rw-p 00003000 103:06 7612578                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+7fc4ec106000-7fc4ec107000 ---p 00000000 00:00 0 
+7fc4ec107000-7fc4eca08000 rw-p 00000000 00:00 0 
+7fc4eca08000-7fc4eca09000 ---p 00000000 00:00 0 
+7fc4eca09000-7fc4ed30a000 rw-p 00000000 00:00 0 
+7fc4ed30a000-7fc4ed30b000 ---p 00000000 00:00 0 
+7fc4ed30b000-7fc4edb0b000 rw-p 00000000 00:00 0 
+7fc4edb0b000-7fc4edb0c000 ---p 00000000 00:00 0 
+7fc4edb0c000-7fc4ee30c000 rw-p 00000000 00:00 0 
+7fc4ee30c000-7fc4ee30d000 ---p 00000000 00:00 0 
+7fc4ee30d000-7fc4eeb0d000 rw-p 00000000 00:00 0 
+7fc4eeb0d000-7fc4eeb0e000 ---p 00000000 00:00 0 
+7fc4eeb0e000-7fc4ef30e000 rw-p 00000000 00:00 0 
+7fc4ef30e000-7fc4ef30f000 ---p 00000000 00:00 0 
+7fc4ef30f000-7fc4efb0f000 rw-p 00000000 00:00 0 
+7fc4efb0f000-7fc4efb37000 r--p 00000000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efb37000-7fc4efbd6000 r-xp 00028000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efbd6000-7fc4efc1d000 r--p 000c7000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efc1d000-7fc4efc1e000 ---p 0010e000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efc1e000-7fc4efc23000 r--p 0010e000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efc23000-7fc4efc2b000 rw-p 00113000 103:06 7608351                   /opt/ros/foxy/lib/x86_64-linux-gnu/libddsc.so.0.7.0
+7fc4efc2b000-7fc4efc2c000 rw-p 00000000 00:00 0 
+7fc4efc2c000-7fc4efc42000 r--p 00000000 103:06 7608426                   /opt/ros/foxy/lib/librmw_cyclonedds_cpp.so
+7fc4efc42000-7fc4efc95000 r-xp 00016000 103:06 7608426                   /opt/ros/foxy/lib/librmw_cyclonedds_cpp.so
+7fc4efc95000-7fc4efca9000 r--p 00069000 103:06 7608426                   /opt/ros/foxy/lib/librmw_cyclonedds_cpp.so
+7fc4efca9000-7fc4efcab000 r--p 0007c000 103:06 7608426                   /opt/ros/foxy/lib/librmw_cyclonedds_cpp.so
+7fc4efcab000-7fc4efcad000 rw-p 0007e000 103:06 7608426                   /opt/ros/foxy/lib/librmw_cyclonedds_cpp.so
+7fc4efcad000-7fc4efcb9000 rw-p 00000000 00:00 0 
+7fc4efcb9000-7fc4efcba000 r--p 00000000 103:06 7612571                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+7fc4efcba000-7fc4efcbb000 r-xp 00001000 103:06 7612571                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+7fc4efcbb000-7fc4efcbc000 r--p 00002000 103:06 7612571                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+7fc4efcbc000-7fc4efcbd000 r--p 00002000 103:06 7612571                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+7fc4efcbd000-7fc4efcbe000 rw-p 00003000 103:06 7612571                   /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+7fc4efcbe000-7fc4efcf0000 r--p 00000000 103:06 11288560                  /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+7fc4efcf0000-7fc4efd4f000 r-xp 00032000 103:06 11288560                  /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+7fc4efd4f000-7fc4efd62000 r--p 00091000 103:06 11288560                  /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+7fc4efd62000-7fc4efd66000 r--p 000a3000 103:06 11288560                  /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+7fc4efd66000-7fc4efd67000 rw-p 000a7000 103:06 11288560                  /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+7fc4efd67000-7fc4efd69000 r--p 00000000 103:06 7612207                   /opt/ros/foxy/lib/librosidl_typesupport_c.so
+7fc4efd69000-7fc4efd6b000 r-xp 00002000 103:06 7612207                   /opt/ros/foxy/lib/librosidl_typesupport_c.so
+7fc4efd6b000-7fc4efd6c000 r--p 00004000 103:06 7612207                   /opt/ros/foxy/lib/librosidl_typesupport_c.so
+7fc4efd6c000-7fc4efd6d000 r--p 00004000 103:06 7612207                   /opt/ros/foxy/lib/librosidl_typesupport_c.so
+7fc4efd6d000-7fc4efd6e000 rw-p 00005000 103:06 7612207                   /opt/ros/foxy/lib/librosidl_typesupport_c.so
+7fc4efd6e000-7fc4efd70000 r--p 00000000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd70000-7fc4efd8a000 r-xp 00002000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd8a000-7fc4efd8e000 r--p 0001c000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd8e000-7fc4efd8f000 ---p 00020000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd8f000-7fc4efd90000 r--p 00020000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd90000-7fc4efd91000 rw-p 00021000 103:06 7612996                   /opt/ros/foxy/lib/libyaml.so
+7fc4efd91000-7fc4efd92000 r--p 00000000 103:06 5244505                   /lib/x86_64-linux-gnu/libdl-2.31.so
+7fc4efd92000-7fc4efd94000 r-xp 00001000 103:06 5244505                   /lib/x86_64-linux-gnu/libdl-2.31.so
+7fc4efd94000-7fc4efd95000 r--p 00003000 103:06 5244505                   /lib/x86_64-linux-gnu/libdl-2.31.so
+7fc4efd95000-7fc4efd96000 r--p 00003000 103:06 5244505                   /lib/x86_64-linux-gnu/libdl-2.31.so
+7fc4efd96000-7fc4efd97000 rw-p 00004000 103:06 5244505                   /lib/x86_64-linux-gnu/libdl-2.31.so
+7fc4efd97000-7fc4efd99000 rw-p 00000000 00:00 0 
+7fc4efd99000-7fc4efd9b000 r--p 00000000 103:06 7611910                   /opt/ros/foxy/lib/librosidl_runtime_c.so
+7fc4efd9b000-7fc4efd9e000 r-xp 00002000 103:06 7611910                   /opt/ros/foxy/lib/librosidl_runtime_c.so
+7fc4efd9e000-7fc4efda0000 r--p 00005000 103:06 7611910                   /opt/ros/foxy/lib/librosidl_runtime_c.so
+7fc4efda0000-7fc4efda1000 r--p 00006000 103:06 7611910                   /opt/ros/foxy/lib/librosidl_runtime_c.so
+7fc4efda1000-7fc4efda2000 rw-p 00007000 103:06 7611910                   /opt/ros/foxy/lib/librosidl_runtime_c.so
+7fc4efda2000-7fc4efda8000 r--p 00000000 103:06 7612975                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+7fc4efda8000-7fc4efdae000 r-xp 00006000 103:06 7612975                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+7fc4efdae000-7fc4efdb2000 r--p 0000c000 103:06 7612975                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+7fc4efdb2000-7fc4efdb3000 r--p 0000f000 103:06 7612975                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+7fc4efdb3000-7fc4efdb4000 rw-p 00010000 103:06 7612975                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+7fc4efdb4000-7fc4efdb7000 r--p 00000000 103:06 7612991                   /opt/ros/foxy/lib/librcl_logging_spdlog.so
+7fc4efdb7000-7fc4efdb9000 r-xp 00003000 103:06 7612991                   /opt/ros/foxy/lib/librcl_logging_spdlog.so
+7fc4efdb9000-7fc4efdba000 r--p 00005000 103:06 7612991                   /opt/ros/foxy/lib/librcl_logging_spdlog.so
+7fc4efdba000-7fc4efdbb000 r--p 00005000 103:06 7612991                   /opt/ros/foxy/lib/librcl_logging_spdlog.so
+7fc4efdbb000-7fc4efdbc000 rw-p 00006000 103:06 7612991                   /opt/ros/foxy/lib/librcl_logging_spdlog.so
+7fc4efdbc000-7fc4efdc0000 r--p 00000000 103:06 7612976                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+7fc4efdc0000-7fc4efdc1000 r-xp 00004000 103:06 7612976                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+7fc4efdc1000-7fc4efdc4000 r--p 00005000 103:06 7612976                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+7fc4efdc4000-7fc4efdc6000 r--p 00007000 103:06 7612976                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+7fc4efdc6000-7fc4efdc7000 rw-p 00009000 103:06 7612976                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+7fc4efdc7000-7fc4efdc9000 r--p 00000000 103:06 7612348                   /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+7fc4efdc9000-7fc4efdcc000 r-xp 00002000 103:06 7612348                   /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+7fc4efdcc000-7fc4efdcd000 r--p 00005000 103:06 7612348                   /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+7fc4efdcd000-7fc4efdce000 r--p 00005000 103:06 7612348                   /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+7fc4efdce000-7fc4efdcf000 rw-p 00006000 103:06 7612348                   /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+7fc4efdcf000-7fc4efdd1000 rw-p 00000000 00:00 0 
+7fc4efdd1000-7fc4efde0000 r--p 00000000 103:06 5244506                   /lib/x86_64-linux-gnu/libm-2.31.so
+7fc4efde0000-7fc4efe87000 r-xp 0000f000 103:06 5244506                   /lib/x86_64-linux-gnu/libm-2.31.so
+7fc4efe87000-7fc4eff1e000 r--p 000b6000 103:06 5244506                   /lib/x86_64-linux-gnu/libm-2.31.so
+7fc4eff1e000-7fc4eff1f000 r--p 0014c000 103:06 5244506                   /lib/x86_64-linux-gnu/libm-2.31.so
+7fc4eff1f000-7fc4eff20000 rw-p 0014d000 103:06 5244506                   /lib/x86_64-linux-gnu/libm-2.31.so
+7fc4eff20000-7fc4eff23000 r--p 00000000 103:06 7612174                   /opt/ros/foxy/lib/librcpputils.so
+7fc4eff23000-7fc4eff26000 r-xp 00003000 103:06 7612174                   /opt/ros/foxy/lib/librcpputils.so
+7fc4eff26000-7fc4eff27000 r--p 00006000 103:06 7612174                   /opt/ros/foxy/lib/librcpputils.so
+7fc4eff27000-7fc4eff28000 r--p 00006000 103:06 7612174                   /opt/ros/foxy/lib/librcpputils.so
+7fc4eff28000-7fc4eff29000 rw-p 00007000 103:06 7612174                   /opt/ros/foxy/lib/librcpputils.so
+7fc4eff29000-7fc4eff2b000 r--p 00000000 103:06 7611977                   /opt/ros/foxy/lib/librmw.so
+7fc4eff2b000-7fc4eff2e000 r-xp 00002000 103:06 7611977                   /opt/ros/foxy/lib/librmw.so
+7fc4eff2e000-7fc4eff30000 r--p 00005000 103:06 7611977                   /opt/ros/foxy/lib/librmw.so
+7fc4eff30000-7fc4eff31000 r--p 00006000 103:06 7611977                   /opt/ros/foxy/lib/librmw.so
+7fc4eff31000-7fc4eff32000 rw-p 00007000 103:06 7611977                   /opt/ros/foxy/lib/librmw.so
+7fc4eff32000-7fc4eff35000 r--p 00000000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff35000-7fc4eff39000 r-xp 00003000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff39000-7fc4eff3b000 r--p 00007000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff3b000-7fc4eff3c000 ---p 00009000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff3c000-7fc4eff3d000 r--p 00009000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff3d000-7fc4eff3e000 rw-p 0000a000 103:06 7613068                   /opt/ros/foxy/lib/librmw_implementation.so
+7fc4eff3e000-7fc4eff43000 r--p 00000000 103:06 7612979                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+7fc4eff43000-7fc4eff44000 r-xp 00005000 103:06 7612979                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+7fc4eff44000-7fc4eff47000 r--p 00006000 103:06 7612979                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+7fc4eff47000-7fc4eff49000 r--p 00008000 103:06 7612979                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+7fc4eff49000-7fc4eff4a000 rw-p 0000a000 103:06 7612979                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+7fc4eff4a000-7fc4eff4b000 r--p 00000000 103:06 7613129                   /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+7fc4eff4b000-7fc4eff4c000 r-xp 00001000 103:06 7613129                   /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+7fc4eff4c000-7fc4eff4d000 r--p 00002000 103:06 7613129                   /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+7fc4eff4d000-7fc4eff4e000 r--p 00002000 103:06 7613129                   /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+7fc4eff4e000-7fc4eff4f000 rw-p 00003000 103:06 7613129                   /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+7fc4eff4f000-7fc4eff51000 rw-p 00000000 00:00 0 
+7fc4eff51000-7fc4eff53000 r--p 00000000 103:06 7613000                   /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+7fc4eff53000-7fc4eff58000 r-xp 00002000 103:06 7613000                   /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+7fc4eff58000-7fc4eff5a000 r--p 00007000 103:06 7613000                   /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+7fc4eff5a000-7fc4eff5b000 r--p 00008000 103:06 7613000                   /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+7fc4eff5b000-7fc4eff5c000 rw-p 00009000 103:06 7613000                   /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+7fc4eff5c000-7fc4eff63000 r--p 00000000 103:06 5245067                   /lib/x86_64-linux-gnu/libpthread-2.31.so
+7fc4eff63000-7fc4eff74000 r-xp 00007000 103:06 5245067                   /lib/x86_64-linux-gnu/libpthread-2.31.so
+7fc4eff74000-7fc4eff79000 r--p 00018000 103:06 5245067                   /lib/x86_64-linux-gnu/libpthread-2.31.so
+7fc4eff79000-7fc4eff7a000 r--p 0001c000 103:06 5245067                   /lib/x86_64-linux-gnu/libpthread-2.31.so
+7fc4eff7a000-7fc4eff7b000 rw-p 0001d000 103:06 5245067                   /lib/x86_64-linux-gnu/libpthread-2.31.so
+7fc4eff7b000-7fc4eff7f000 rw-p 00000000 00:00 0 
+7fc4eff7f000-7fc4effa4000 r--p 00000000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4effa4000-7fc4f011c000 r-xp 00025000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4f011c000-7fc4f0166000 r--p 0019d000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4f0166000-7fc4f0167000 ---p 001e7000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4f0167000-7fc4f016a000 r--p 001e7000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4f016a000-7fc4f016d000 rw-p 001ea000 103:06 5244504                   /lib/x86_64-linux-gnu/libc-2.31.so
+7fc4f016d000-7fc4f0171000 rw-p 00000000 00:00 0 
+7fc4f0171000-7fc4f0174000 r--p 00000000 103:06 5243630                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc4f0174000-7fc4f0186000 r-xp 00003000 103:06 5243630                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc4f0186000-7fc4f018a000 r--p 00015000 103:06 5243630                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc4f018a000-7fc4f018b000 r--p 00018000 103:06 5243630                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc4f018b000-7fc4f018c000 rw-p 00019000 103:06 5243630                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fc4f018c000-7fc4f0222000 r--p 00000000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f0222000-7fc4f0312000 r-xp 00096000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f0312000-7fc4f035b000 r--p 00186000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f035b000-7fc4f035c000 ---p 001cf000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f035c000-7fc4f0367000 r--p 001cf000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f0367000-7fc4f036a000 rw-p 001da000 103:06 11272213                  /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+7fc4f036a000-7fc4f036d000 rw-p 00000000 00:00 0 
+7fc4f0371000-7fc4f0379000 r--p 00000000 103:06 7612982                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+7fc4f0379000-7fc4f037b000 r-xp 00008000 103:06 7612982                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+7fc4f037b000-7fc4f037d000 r--p 0000a000 103:06 7612982                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+7fc4f037d000-7fc4f037e000 r--p 0000b000 103:06 7612982                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+7fc4f037e000-7fc4f0380000 rw-p 0000c000 103:06 7612982                   /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+7fc4f0380000-7fc4f0383000 r--p 00000000 103:06 7613028                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_introspection_cpp.so
+7fc4f0383000-7fc4f0384000 r-xp 00003000 103:06 7613028                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_introspection_cpp.so
+7fc4f0384000-7fc4f0385000 r--p 00004000 103:06 7613028                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_introspection_cpp.so
+7fc4f0385000-7fc4f0386000 r--p 00004000 103:06 7613028                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_introspection_cpp.so
+7fc4f0386000-7fc4f0387000 rw-p 00005000 103:06 7613028                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_introspection_cpp.so
+7fc4f0387000-7fc4f0388000 r--p 00000000 103:06 7612395                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+7fc4f0388000-7fc4f0389000 r-xp 00001000 103:06 7612395                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+7fc4f0389000-7fc4f038a000 r--p 00002000 103:06 7612395                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+7fc4f038a000-7fc4f038b000 r--p 00002000 103:06 7612395                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+7fc4f038b000-7fc4f038c000 rw-p 00003000 103:06 7612395                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+7fc4f038c000-7fc4f038d000 r--p 00000000 103:06 7612449                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+7fc4f038d000-7fc4f038e000 r-xp 00001000 103:06 7612449                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+7fc4f038e000-7fc4f038f000 r--p 00002000 103:06 7612449                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+7fc4f038f000-7fc4f0390000 r--p 00002000 103:06 7612449                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+7fc4f0390000-7fc4f0391000 rw-p 00003000 103:06 7612449                   /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+7fc4f0391000-7fc4f0397000 r--p 00000000 103:06 7613018                   /opt/ros/foxy/lib/librmw_dds_common.so
+7fc4f0397000-7fc4f03a2000 r-xp 00006000 103:06 7613018                   /opt/ros/foxy/lib/librmw_dds_common.so
+7fc4f03a2000-7fc4f03a5000 r--p 00011000 103:06 7613018                   /opt/ros/foxy/lib/librmw_dds_common.so
+7fc4f03a5000-7fc4f03a6000 r--p 00013000 103:06 7613018                   /opt/ros/foxy/lib/librmw_dds_common.so
+7fc4f03a6000-7fc4f03a7000 rw-p 00014000 103:06 7613018                   /opt/ros/foxy/lib/librmw_dds_common.so
+7fc4f03a7000-7fc4f03a8000 r--p 00000000 103:06 7613024                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_cpp.so
+7fc4f03a8000-7fc4f03a9000 r-xp 00001000 103:06 7613024                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_cpp.so
+7fc4f03a9000-7fc4f03aa000 r--p 00002000 103:06 7613024                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_cpp.so
+7fc4f03aa000-7fc4f03ab000 r--p 00002000 103:06 7613024                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_cpp.so
+7fc4f03ab000-7fc4f03ac000 rw-p 00003000 103:06 7613024                   /opt/ros/foxy/lib/librmw_dds_common__rosidl_typesupport_cpp.so
+7fc4f03ac000-7fc4f03ad000 r--p 00000000 103:06 7613073                   /opt/ros/foxy/lib/libtracetools.so
+7fc4f03ad000-7fc4f03ae000 r-xp 00001000 103:06 7613073                   /opt/ros/foxy/lib/libtracetools.so
+7fc4f03ae000-7fc4f03af000 r--p 00002000 103:06 7613073                   /opt/ros/foxy/lib/libtracetools.so
+7fc4f03af000-7fc4f03b0000 r--p 00002000 103:06 7613073                   /opt/ros/foxy/lib/libtracetools.so
+7fc4f03b0000-7fc4f03b1000 rw-p 00003000 103:06 7613073                   /opt/ros/foxy/lib/libtracetools.so
+7fc4f03b1000-7fc4f03b3000 rw-p 00000000 00:00 0 
+7fc4f03b3000-7fc4f03b8000 r--p 00000000 103:06 7611840                   /opt/ros/foxy/lib/librcutils.so
+7fc4f03b8000-7fc4f03c3000 r-xp 00005000 103:06 7611840                   /opt/ros/foxy/lib/librcutils.so
+7fc4f03c3000-7fc4f03c9000 r--p 00010000 103:06 7611840                   /opt/ros/foxy/lib/librcutils.so
+7fc4f03c9000-7fc4f03ca000 r--p 00015000 103:06 7611840                   /opt/ros/foxy/lib/librcutils.so
+7fc4f03ca000-7fc4f03cb000 rw-p 00016000 103:06 7611840                   /opt/ros/foxy/lib/librcutils.so
+7fc4f03cb000-7fc4f03cc000 r--p 00000000 103:06 7613086                   /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+7fc4f03cc000-7fc4f03cd000 r-xp 00001000 103:06 7613086                   /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+7fc4f03cd000-7fc4f03ce000 r--p 00002000 103:06 7613086                   /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+7fc4f03ce000-7fc4f03cf000 r--p 00002000 103:06 7613086                   /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+7fc4f03cf000-7fc4f03d0000 rw-p 00003000 103:06 7613086                   /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+7fc4f03d0000-7fc4f03d9000 r--p 00000000 103:06 7613077                   /opt/ros/foxy/lib/librcl.so
+7fc4f03d9000-7fc4f03fa000 r-xp 00009000 103:06 7613077                   /opt/ros/foxy/lib/librcl.so
+7fc4f03fa000-7fc4f040a000 r--p 0002a000 103:06 7613077                   /opt/ros/foxy/lib/librcl.so
+7fc4f040a000-7fc4f040b000 r--p 00039000 103:06 7613077                   /opt/ros/foxy/lib/librcl.so
+7fc4f040b000-7fc4f040d000 rw-p 0003a000 103:06 7613077                   /opt/ros/foxy/lib/librcl.so
+7fc4f040d000-7fc4f0412000 r--p 00000000 103:06 7613100                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+7fc4f0412000-7fc4f0413000 r-xp 00005000 103:06 7613100                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+7fc4f0413000-7fc4f0416000 r--p 00006000 103:06 7613100                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+7fc4f0416000-7fc4f0418000 r--p 00008000 103:06 7613100                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+7fc4f0418000-7fc4f0419000 rw-p 0000a000 103:06 7613100                   /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+7fc4f0419000-7fc4f041b000 r--p 00000000 103:06 7613109                   /opt/ros/foxy/lib/liblibstatistics_collector.so
+7fc4f041b000-7fc4f041d000 r-xp 00002000 103:06 7613109                   /opt/ros/foxy/lib/liblibstatistics_collector.so
+7fc4f041d000-7fc4f041e000 r--p 00004000 103:06 7613109                   /opt/ros/foxy/lib/liblibstatistics_collector.so
+7fc4f041e000-7fc4f041f000 r--p 00004000 103:06 7613109                   /opt/ros/foxy/lib/liblibstatistics_collector.so
+7fc4f041f000-7fc4f0420000 rw-p 00005000 103:06 7613109                   /opt/ros/foxy/lib/liblibstatistics_collector.so
+7fc4f0420000-7fc4f04cc000 r--p 00000000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f04cc000-7fc4f05a2000 r-xp 000ac000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f05a2000-7fc4f05e1000 r--p 00182000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f05e1000-7fc4f05e2000 ---p 001c1000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f05e2000-7fc4f05e9000 r--p 001c1000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f05e9000-7fc4f05ec000 rw-p 001c8000 103:06 7613138                   /opt/ros/foxy/lib/librclcpp.so
+7fc4f05ec000-7fc4f05ef000 rw-p 00000000 00:00 0 
+7fc4f05ef000-7fc4f05f0000 r--p 00000000 103:06 5244496                   /lib/x86_64-linux-gnu/ld-2.31.so
+7fc4f05f0000-7fc4f0613000 r-xp 00001000 103:06 5244496                   /lib/x86_64-linux-gnu/ld-2.31.so
+7fc4f0613000-7fc4f061b000 r--p 00024000 103:06 5244496                   /lib/x86_64-linux-gnu/ld-2.31.so
+7fc4f061c000-7fc4f061d000 r--p 0002c000 103:06 5244496                   /lib/x86_64-linux-gnu/ld-2.31.so
+7fc4f061d000-7fc4f061e000 rw-p 0002d000 103:06 5244496                   /lib/x86_64-linux-gnu/ld-2.31.so
+7fc4f061e000-7fc4f061f000 rw-p 00000000 00:00 0 
+7fff72a02000-7fff72a24000 rw-p 00000000 00:00 0                          [stack]
+7fff72b67000-7fff72b6a000 r--p 00000000 00:00 0                          [vvar]
+7fff72b6a000-7fff72b6b000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]
