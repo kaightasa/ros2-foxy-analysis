@@ -1,6 +1,0 @@
-Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/asana/ros2-foxy-analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/asana/ros2-foxy-analysis/install/pubsub
-Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/asana/ros2-foxy-analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/asana/ros2-foxy-analysis/install/pubsub
-Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/asana/ros2-foxy-analysis/build/pubsub -- -j8 -l8
-Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/asana/ros2-foxy-analysis/build/pubsub -- -j8 -l8
-Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/asana/ros2-foxy-analysis/build/pubsub
-Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/asana/ros2-foxy-analysis/build/pubsub
