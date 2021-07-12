@@ -1,0 +1,67 @@
+[0.008s] Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/asana/ros2-foxy-analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/asana/ros2-foxy-analysis/install/pubsub
+[0.041s] -- The C compiler identification is GNU 9.3.0
+[0.076s] -- The CXX compiler identification is GNU 9.3.0
+[0.081s] -- Detecting C compiler ABI info
+[0.122s] -- Detecting C compiler ABI info - done
+[0.130s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.130s] -- Detecting C compile features
+[0.130s] -- Detecting C compile features - done
+[0.132s] -- Detecting CXX compiler ABI info
+[0.175s] -- Detecting CXX compiler ABI info - done
+[0.183s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.183s] -- Detecting CXX compile features
+[0.183s] -- Detecting CXX compile features - done
+[0.185s] -- Found ament_cmake: 0.9.8 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.203s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.5", minimum required is "3") 
+[0.203s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.347s] -- Found rclcpp: 2.3.1 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.374s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.377s] -- Found rosidl_adapter: 1.2.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.419s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[0.432s] -- Found FastRTPS: /opt/ros/foxy/include  
+[0.475s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.508s] -- Found rmw_implementation_cmake: 1.0.3 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.509s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.509s] -- Looking for pthread.h
+[0.544s] -- Looking for pthread.h - found
+[0.544s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.584s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[0.584s] -- Looking for pthread_create in pthreads
+[0.644s] -- Looking for pthread_create in pthreads - not found
+[0.645s] -- Looking for pthread_create in pthread
+[0.709s] -- Looking for pthread_create in pthread - found
+[0.710s] -- Found Threads: TRUE  
+[0.844s] -- Configuring done
+[0.851s] -- Generating done
+[0.851s] -- Build files have been written to: /home/asana/ros2-foxy-analysis/build/pubsub
+[0.856s] Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake /home/asana/ros2-foxy-analysis/pubsub -DCMAKE_INSTALL_PREFIX=/home/asana/ros2-foxy-analysis/install/pubsub
+[0.859s] Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/asana/ros2-foxy-analysis/build/pubsub -- -j8 -l8
+[0.872s] [ 25%] [32mBuilding CXX object CMakeFiles/listener.dir/src/subscriber_member_function.cpp.o[0m
+[0.872s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[2.994s] [ 75%] [32m[1mLinking CXX executable talker[0m
+[3.099s] [ 75%] Built target talker
+[4.111s] [100%] [32m[1mLinking CXX executable listener[0m
+[4.251s] [100%] Built target listener
+[4.254s] Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --build /home/asana/ros2-foxy-analysis/build/pubsub -- -j8 -l8
+[4.272s] Invoking command in '/home/asana/ros2-foxy-analysis/build/pubsub': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/asana/ros2-foxy-analysis/build/pubsub
+[4.273s] -- Install configuration: ""
+[4.274s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/lib/pubsub/talker
+[4.274s] -- Set runtime path of "/home/asana/ros2-foxy-analysis/install/pubsub/lib/pubsub/talker" to ""
+[4.274s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/lib/pubsub/listener
+[4.276s] -- Set runtime path of "/home/asana/ros2-foxy-analysis/install/pubsub/lib/pubsub/listener" to ""
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/ament_index/resource_index/package_run_dependencies/pubsub
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/ament_index/resource_index/parent_prefix_path/pubsub
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.sh
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/environment/ament_prefix_path.dsv
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/environment/path.sh
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/environment/path.dsv
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/local_setup.bash
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/local_setup.sh
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/local_setup.zsh
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/local_setup.dsv
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/package.dsv
+[4.276s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/ament_index/resource_index/packages/pubsub
+[4.277s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/cmake/pubsubConfig.cmake
+[4.277s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/cmake/pubsubConfig-version.cmake
+[4.277s] -- Installing: /home/asana/ros2-foxy-analysis/install/pubsub/share/pubsub/package.xml
+[4.278s] Invoked command in '/home/asana/ros2-foxy-analysis/build/pubsub' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/local/bin/cmake --install /home/asana/ros2-foxy-analysis/build/pubsub

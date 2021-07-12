@@ -1,4 +1,0 @@
-[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:[m[K In member function ‘[01m[Kvoid MinimalSubscriber::topic_callback(std_msgs::msg::Int32MultiArray_<std::allocator<void> >::SharedPtr) const[m[K’:
-[01m[K/home/pflab/ros2_foxy_analysis/pubsub/src/subscriber_member_function.cpp:35:71:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Karray[m[K’ [[01;35m[K-Wunused-parameter[m[K]
-   35 |   void topic_callback([01;35m[Kconst std_msgs::msg::Int32MultiArray::SharedPtr array[m[K) const
-      |                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
